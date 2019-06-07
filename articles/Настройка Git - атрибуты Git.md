@@ -22,11 +22,11 @@
 
 Теперь Git не будет пытаться конвертировать или исправлять ошибки CRLF; он также не будет пытаться вычислить или распечатать diff для изменений в этом файле, когда вы запустите `git show` или `git diff` в вашем проекте.
 
-#### Diffing Binary Files
+#### Сравнения Бинарных Файлов
 
-You can also use the Git attributes functionality to effectively diff binary files. You do this by telling Git how to convert your binary data to a text format that can be compared via the normal diff.
+Вы также можете использовать функциональность атрибутов Git для эффективного сравнения двоичных файлов. Вы делаете это, сообщая Git, как преобразовать ваши двоичные данные в текстовый формат, который можно сравнить с помощью обычного diff.
 
-First, you’ll use this technique to solve one of the most annoying problems known to humanity: version-controlling Microsoft Word documents. Everyone knows that Word is the most horrific editor around, but oddly, everyone still uses it. If you want to version-control Word documents, you can stick them in a Git repository and commit every once in a while; but what good does that do? If you run`git diff`normally, you only see something like this:
+Во-первых, вы будете использовать эту технику для решения одной из самых досадных проблем, известных человечеству: контроль версий документов Microsoft Word. Все знают, что Word - самый ужасный редактор из всех, но, как ни странно, все еще используют его. Если вы хотите контролировать документы Word, вы можете поместить их в Git-репозиторий и делать коммиты время от времени; но что хорошего в этом? Если вы запускаете git diff нормально, вы видите только что-то вроде этого:
 
 ```console
 $ git diff
@@ -35,13 +35,13 @@ index 88839c4..4afcb7c 100644
 Binary files a/chapter1.docx and b/chapter1.docx differ
 ```
 
-You can’t directly compare two versions unless you check them out and scan them manually, right? It turns out you can do this fairly well using Git attributes. Put the following line in your`.gitattributes`file:
+Вы не можете напрямую сравнить две версии, если не проверите их и не отсканируете их вручную, верно? Оказывается, вы можете сделать это довольно хорошо, используя атрибуты Git. Поместите следующую строку в ваш файл `.gitattributes`:
 
 ```ini
 *.docx diff=word
 ```
 
-This tells Git that any file that matches this pattern (`.docx`) should use the “word” filter when you try to view a diff that contains changes. What is the “word” filter? You have to set it up. Here you’ll configure Git to use the`docx2txt`program to convert Word documents into readable text files, which it will then diff properly.
+Это говорит Git, что любой файл, соответствующий этому шаблону (`.docx`), должен использовать фильтр «word», когда вы пытаетесь просмотреть diff, содержащий изменения. Что такое «word» фильтр? Вы должны настроить это. Здесь вы сконфигурируете Git для использования программы `docx2txt` для преобразования документов Word в читаемые текстовые файлы, которые затем будут правильно отображаться.
 
 First, you’ll need to install`docx2txt`; you can download it from[https://sourceforge.net/projects/docx2txt](https://sourceforge.net/projects/docx2txt). Follow the instructions in the`INSTALL`file to put it somewhere your shell can find it. Next, you’ll write a wrapper script to convert output to the format Git expects. Create a file that’s somewhere in your path called`docx2txt`, and add these contents:
 
