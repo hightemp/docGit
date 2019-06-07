@@ -144,6 +144,10 @@ However, that result is of limited use. If you’ve used keyword substitution in
 
 It turns out that you can write your own filters for doing substitutions in files on commit/checkout. These are called “clean” and “smudge” filters. In the`.gitattributes`file, you can set a filter for particular paths and then set up scripts that will process files just before they’re checked out (“smudge”, see[The “smudge” filter is run on checkout.](https://git-scm.com/book/en/v2/ch00/filters_a)) and just before they’re staged (“clean”, see[The “clean” filter is run when files are staged.](https://git-scm.com/book/en/v2/ch00/filters_b)). These filters can be set to do all sorts of fun things.
 
+![](/images/8c34c1aeb3ddf12194cfa7ac92160491.png)
+
+Figure 144. The “smudge” filter is run on checkout.
+
 ![The ``smudge'' filter is run on checkout.](/images/2b92285c3b797e606ca4792eb9ff5dde.png)Figure 144. The “smudge” filter is run on checkout.![The ``clean'' filter is run when files are staged.](/images/ac5b46b36c9200ccec5d88a7159350d9.png)
 
 Figure 145. The “clean” filter is run when files are staged.
