@@ -193,7 +193,7 @@ date*.txt filter=dater
 $ echo '# $Date$' > date_test.txt
 ```
 
-If you commit those changes and check out the file again, you see the keyword properly substituted:
+Если вы фиксируете эти изменения и извлекаете файл снова, вы видите правильно замененное ключевое слово:
 
 ```console
 $ git add date_test.txt .gitattributes
@@ -204,29 +204,29 @@ $ cat date_test.txt
 # $Date: Tue Apr 21 07:26:52 2009 -0700$
 ```
 
-You can see how powerful this technique can be for customized applications. You have to be careful, though, because the`.gitattributes`file is committed and passed around with the project, but the driver (in this case,`dater`) isn’t, so it won’t work everywhere. When you design these filters, they should be able to fail gracefully and have the project still work properly.
+Вы можете увидеть, насколько мощной может быть эта техника для пользовательских приложений. Вы должны быть осторожны, потому что файл `.gitattributes` фиксируется и передается вместе с проектом, но драйвер (в данном случае, `dater`) - нет, поэтому он не будет работать везде. Когда вы проектируете эти фильтры, они должны быть в состоянии изящно провалиться, и проект все еще будет работать должным образом.
 
-### Exporting Your Repository
+### Экспорт вашего репозитория
 
-Git attribute data also allows you to do some interesting things when exporting an archive of your project.
+Данные атрибутов Git также позволяют делать некоторые интересные вещи при экспорте архива вашего проекта.
 
 #### `export-ignore`
 
-You can tell Git not to export certain files or directories when generating an archive. If there is a subdirectory or file that you don’t want to include in your archive file but that you do want checked into your project, you can determine those files via the`export-ignore`attribute.
+Вы можете указать Git не экспортировать определенные файлы или каталоги при создании архива. Если есть подкаталог или файл, который вы не хотите включать в свой архивный файл, но который вы действительно хотите включить в свой проект, вы можете определить эти файлы с помощью атрибута `export-ignore`.
 
-For example, say you have some test files in a`test/`subdirectory, and it doesn’t make sense to include them in the tarball export of your project. You can add the following line to your Git attributes file:
+Например, скажем, у вас есть несколько тестовых файлов в подкаталоге `test/`, и нет смысла включать их в экспорт tarball вашего проекта. Вы можете добавить следующую строку в ваш файл атрибутов Git:
 
 ```ini
 test/ export-ignore
 ```
 
-Now, when you run`git archive`to create a tarball of your project, that directory won’t be included in the archive.
+Теперь, когда вы запустите `git archive` для создания архива вашего проекта, этот каталог не будет включен в архив.
 
 #### `export-subst`
 
-When exporting files for deployment you can apply`git log`'s formatting and keyword-expansion processing to selected portions of files marked with the`export-subst`attribute.
+При экспорте файлов для развертывания вы можете применить форматирование `git log` и обработку раскрытия ключевых слов к отдельным частям файлов, помеченным атрибутом `export-subst`.
 
-For instance, if you want to include a file named`LAST_COMMIT`in your project, and have metadata about the last commit automatically injected into it when`git archive`runs, you can for example set up your`.gitattributes`and`LAST_COMMIT`files like this:
+Например, если вы хотите включить в свой проект файл с именем `LAST_COMMIT` и автоматически вставлять в него метаданные о последнем коммите при запуске `git archive`, вы можете, например, настроить свои `.gitattributes` и `LAST_COMMIT` файлы вроде этого:
 
 ```ini
 LAST_COMMIT export-subst
@@ -238,7 +238,7 @@ $ git add LAST_COMMIT .gitattributes
 $ git commit -am 'adding LAST_COMMIT file for archives'
 ```
 
-When you run`git archive`, the contents of the archived file will look like this:
+Когда вы запускаете `git archive`, содержимое архивного файла будет выглядеть так:
 
 ```console
 $ git archive HEAD | tar xCf ../deployment-testing -
@@ -246,7 +246,7 @@ $ cat ../deployment-testing/LAST_COMMIT
 Last commit date: Tue Apr 21 08:38:48 2009 -0700 by Scott Chacon
 ```
 
-The substitutions can include for example the commit message and any`git notes`, and`git log`can do simple word wrapping:
+Замены могут включать, например, сообщение о коммите и любые `git notes`, а `git log` может выполнять простой перенос слов:
 
 ```console
 $ echo '$Format:Last commit: %h by %aN at %cd%n%+w(76,6,9)%B$' > LAST_COMMIT
