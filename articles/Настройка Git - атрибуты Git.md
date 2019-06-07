@@ -165,9 +165,9 @@ $ git config --global filter.indent.clean indent
 $ git config --global filter.indent.smudge cat
 ```
 
-В этом случае, когда вы фиксируете файлы, которые соответствуют `*.c`, Git будет запускать их через программу indent перед тем, как запускать их, а затем запускать через программу `cat`, прежде чем проверять их обратно на диск. Программа `cat` по сути ничего не делает: она выдает те же данные, что и в нее. Эта комбинация эффективно фильтрует все файлы с исходным кодом на языке C с помощью `indent` перед фиксацией.
+В этом случае, когда вы фиксируете файлы, которые соответствуют `*.c`, Git будет запускать их через программу indent перед тем, как запускать их, а затем запускать через программу `cat`, прежде чем проверять их обратно на диск. Программа `cat` по сути ничего не делает: она выдает те же данные, что и отправили в нее. Эта комбинация эффективно фильтрует все файлы с исходным кодом на языке C с помощью `indent` перед фиксацией.
 
-Another interesting example gets`$Date$`keyword expansion, RCS style. To do this properly, you need a small script that takes a filename, figures out the last commit date for this project, and inserts the date into the file. Here is a small Ruby script that does that:
+Другой интересный пример - расширение ключевого слова `$Date$` в стиле RCS. Чтобы сделать это правильно, вам нужен небольшой скрипт, который берет имя файла, вычисляет дату последней фиксации для этого проекта и вставляет дату в файл. Вот небольшой скрипт Ruby, который делает это:
 
 ```ruby
 #! /usr/bin/env ruby
@@ -176,14 +176,14 @@ last_date = `git log --pretty=format:"%ad" -1`
 puts data.gsub('$Date$', '$Date: ' + last_date.to_s + '$')
 ```
 
-All the script does is get the latest commit date from the`git log`command, stick that into any`$Date$`strings it sees in stdin, and print the results – it should be simple to do in whatever language you’re most comfortable in. You can name this file`expand_date`and put it in your path. Now, you need to set up a filter in Git (call it`dater`) and tell it to use your`expand_date`filter to smudge the files on checkout. You’ll use a Perl expression to clean that up on commit:
+Все, что делает скрипт, это получает последнюю дату фиксации из команды `git log`, вставляет ее в любые строки `$Date$`, которые он видит в stdin, и печатает результаты - это должно быть просто сделать на любом языке, который вам удобен. Вы можете назвать этот файл `expand_date` и указать его в своем пути. Теперь вам нужно настроить фильтр в Git (назовите его `dater`) и сказать ему использовать ваш фильтр "expand_date" для удаления файлов при оформлении заказа. Вы будете использовать выражение Perl для очистки этого при фиксации:
 
 ```console
 $ git config filter.dater.smudge expand_date
 $ git config filter.dater.clean 'perl -pe "s/\\\$Date[^\\\$]*\\\$/\\\$Date\\\$/"'
 ```
 
-This Perl snippet strips out anything it sees in a`$Date$`string, to get back to where you started. Now that your filter is ready, you can test it by setting up a Git attribute for that file that engages the new filter and creating a file with your`$Date$`keyword:
+Этот фрагмент Perl удаляет все, что он видит в строке `$Date$`, чтобы вернуться к тому, с чего вы начали. Теперь, когда ваш фильтр готов, вы можете проверить его, установив атрибут Git для этого файла, который включает новый фильтр, и создайте файл с ключевым словом `$Date$`:
 
 ```ini
 date*.txt filter=dater
