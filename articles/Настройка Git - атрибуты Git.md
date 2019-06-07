@@ -292,6 +292,7 @@ Merge made by recursive.
 
 In this case,`database.xml`stays at whatever version you originally had.
 
+
 **********
 [gitattributes](/tags/gitattributes.md)
 [атрибуты](/tags/%D0%B0%D1%82%D1%80%D0%B8%D0%B1%D1%83%D1%82%D1%8B.md)
