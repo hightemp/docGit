@@ -264,25 +264,25 @@ Last commit: 312ccc8 by Jim Hill at Fri May 8 09:14:04 2015 -0700
          strips the surrounding `$Format:` and `$` markup from the output.
 ```
 
-The resulting archive is suitable for deployment work, but like any exported archive it isn’t suitable for further development work.
+Полученный архив пригоден для развертывания, но, как и любой экспортированный архив, он не подходит для дальнейшей разработки.
 
-### Merge Strategies
+### Стратегии слияния
 
-You can also use Git attributes to tell Git to use different merge strategies for specific files in your project. One very useful option is to tell Git to not try to merge specific files when they have conflicts, but rather to use your side of the merge over someone else’s.
+Вы также можете использовать атрибуты Git, чтобы указать Git использовать разные стратегии слияния для конкретных файлов в вашем проекте. Одним из очень полезных вариантов является указание Git не пытаться объединять определенные файлы, когда у них возникают конфликты, а использовать вашу сторону слияния с чужими.
 
-This is helpful if a branch in your project has diverged or is specialized, but you want to be able to merge changes back in from it, and you want to ignore certain files. Say you have a database settings file called`database.xml`that is different in two branches, and you want to merge in your other branch without messing up the database file. You can set up an attribute like this:
+Это полезно, если ветка в вашем проекте разошлась или является специализированной, но вы хотите иметь возможность объединять в нее изменения и хотите игнорировать определенные файлы. Допустим, у вас есть файл настроек базы данных с именем «database.xml», который отличается в двух ветвях, и вы хотите объединить другую ветку, не перепутав файл базы данных. Вы можете настроить атрибут следующим образом:
 
 ```ini
 database.xml merge=ours
 ```
 
-And then define a dummy`ours`merge strategy with:
+А затем определите фиктивную "нашу" стратегию слияния с помощью:
 
 ```console
 $ git config --global merge.ours.driver true
 ```
 
-If you merge in the other branch, instead of having merge conflicts with the`database.xml`file, you see something like this:
+Если вы выполняете слияние в другой ветке, вместо конфликтов слияния с файлом `database.xml` вы видите что-то вроде этого:
 
 ```console
 $ git merge topic
