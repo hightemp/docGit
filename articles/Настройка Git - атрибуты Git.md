@@ -140,9 +140,9 @@ $ cat test.txt
 $Id: 42812b7653c7b88933f8a9d6cad0ca16714b9bb3 $
 ```
 
-However, that result is of limited use. If you’ve used keyword substitution in CVS or Subversion, you can include a datestamp – the SHA-1 isn’t all that helpful, because it’s fairly random and you can’t tell if one SHA-1 is older or newer than another just by looking at them.
+Однако этот результат имеет ограниченное применение. Если вы использовали подстановку ключевых слов в CVS или Subversion, вы можете включить метку даты - SHA-1 не так уж полезен, потому что это довольно случайно, и вы не можете сказать, если один SHA -1 старше или новее другого, просто посмотрев на них.
 
-It turns out that you can write your own filters for doing substitutions in files on commit/checkout. These are called “clean” and “smudge” filters. In the`.gitattributes`file, you can set a filter for particular paths and then set up scripts that will process files just before they’re checked out (“smudge”, see[The “smudge” filter is run on checkout.](https://git-scm.com/book/en/v2/ch00/filters_a)) and just before they’re staged (“clean”, see[The “clean” filter is run when files are staged.](https://git-scm.com/book/en/v2/ch00/filters_b)). These filters can be set to do all sorts of fun things.
+Оказывается, вы можете написать свои собственные фильтры для выполнения подстановок в файлах при коммите/проверке. Они называются «чистыми»(clean) и «грязными»(smudge) фильтрами. В файле `.gitattributes` вы можете установить фильтр для определенных путей, а затем настроить сценарии, которые будут обрабатывать файлы непосредственно перед их извлечением (“smudge”, см. [The “smudge” filter is run on checkout.](https://git-scm.com/book/en/v2/ch00/filters_a) и перед их постановкой (“clean”, см. [The “clean” filter is run when files are staged.](https://git-scm.com/book/en/v2/ch00/filters_b)). Эти фильтры могут быть настроены на все виды забавных вещей.
 
 ![](/images/8c34c1aeb3ddf12194cfa7ac92160491.png)
 
