@@ -10,11 +10,11 @@
 
 Один интересный трюк, для которого вы можете использовать атрибуты Git - это сообщить Git, какие файлы являются двоичными (в противном случае он не сможет это выяснить), и дать Git специальные инструкции о том, как обрабатывать эти файлы. Например, некоторые текстовые файлы могут быть сгенерированы машиной и не могут быть различимы, тогда как некоторые двоичные файлы могут быть различимы. Вы увидите, как сказать Git, что есть что.
 
-#### Identifying Binary Files
+#### Идентификация бинарных файлов
 
-Some files look like text files but for all intents and purposes are to be treated as binary data. For instance, Xcode projects on macOS contain a file that ends in`.pbxproj`, which is basically a JSON (plain-text JavaScript data format) dataset written out to disk by the IDE, which records your build settings and so on. Although it’s technically a text file (because it’s all UTF-8), you don’t want to treat it as such because it’s really a lightweight database – you can’t merge the contents if two people change it, and diffs generally aren’t helpful. The file is meant to be consumed by a machine. In essence, you want to treat it like a binary file.
+Некоторые файлы выглядят как текстовые файлы, но в целом они должны рассматриваться как двоичные данные. Например, проекты Xcode в macOS содержат файл, который заканчивается на `.pbxproj`, который в основном представляет собой набор данных JSON (текстовый формат данных JavaScript), записанный на диск IDE, который записывает ваши параметры сборки и так далее. Хотя технически это текстовый файл (потому что это все UTF-8), вы не хотите рассматривать его как таковой, потому что это действительно легкая база данных - вы не можете объединить содержимое, если его изменяют два человека, и различия, как правило, не помогают. Файл предназначен для использования машиной. По сути, вы хотите рассматривать его как двоичный файл.
 
-To tell Git to treat all`pbxproj`files as binary data, add the following line to your`.gitattributes`file:
+Чтобы заставить Git обрабатывать все файлы `pbxproj` как двоичные данные, добавьте следующую строку в ваш файл `.gitattributes`:
 
 ```ini
 *.pbxproj binary
