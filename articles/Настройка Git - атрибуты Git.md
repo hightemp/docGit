@@ -20,7 +20,7 @@
 *.pbxproj binary
 ```
 
-Now, Git won’t try to convert or fix CRLF issues; nor will it try to compute or print a diff for changes in this file when you run`git show`or`git diff`on your project.
+Теперь Git не будет пытаться конвертировать или исправлять ошибки CRLF; он также не будет пытаться вычислить или распечатать diff для изменений в этом файле, когда вы запустите `git show` или `git diff` в вашем проекте.
 
 #### Diffing Binary Files
 
