@@ -50,13 +50,13 @@ Binary files a/chapter1.docx and b/chapter1.docx differ
 docx2txt.pl "$1" -
 ```
 
-Don’t forget to`chmod a+x`that file. Finally, you can configure Git to use this script:
+Не забудьте `chmod a + x` этот файл. Наконец, вы можете настроить Git для использования этого скрипта:
 
 ```console
 $ git config diff.word.textconv docx2txt
 ```
 
-Now Git knows that if it tries to do a diff between two snapshots, and any of the files end in`.docx`, it should run those files through the “word” filter, which is defined as the`docx2txt`program. This effectively makes nice text-based versions of your Word files before attempting to diff them.
+Теперь Git знает, что если он пытается выполнить различие между двумя снимками, и любой из файлов заканчивается на `.docx`, он должен запустить эти файлы через фильтр «word», который определен как программа« docx2txt». Это эффективно делает хорошие текстовые версии ваших файлов Word, прежде чем пытаться их различать.
 
 Here’s an example: Chapter 1 of this book was converted to Word format and committed in a Git repository. Then a new paragraph was added. Here’s what`git diff`shows:
 
