@@ -58,7 +58,7 @@ $ git config diff.word.textconv docx2txt
 
 Теперь Git знает, что если он пытается выполнить различие между двумя снимками, и любой из файлов заканчивается на `.docx`, он должен запустить эти файлы через фильтр «word», который определен как программа« docx2txt». Это эффективно делает хорошие текстовые версии ваших файлов Word, прежде чем пытаться их различать.
 
-Here’s an example: Chapter 1 of this book was converted to Word format and committed in a Git repository. Then a new paragraph was added. Here’s what`git diff`shows:
+Вот пример: Глава 1 этой книги была преобразована в формат Word и помещена в репозиторий Git. Затем был добавлен новый абзац. Вот что показывает `git diff`:
 
 ```console
 $ git diff
@@ -76,21 +76,21 @@ index 0b013ca..ba25db5 100644
  Many people's version-control method of choice is to copy files into another directory (perhaps a time-stamped directory, if they're clever). This approach is very common because it is so simple, but it is also incredibly error prone. It is easy to forget which directory you're in and accidentally write to the wrong file or copy over files you don't mean to.
 ```
 
-Git successfully and succinctly tells us that we added the string “Testing: 1, 2, 3.”, which is correct. It’s not perfect – formatting changes wouldn’t show up here – but it certainly works.
+Git успешно и лаконично сообщает нам, что мы добавили строку «Testing: 1, 2, 3.», и это правильно. Он не идеален - изменения форматирования здесь не появятся - но это, безусловно, работает.
 
-Another interesting problem you can solve this way involves diffing image files. One way to do this is to run image files through a filter that extracts their EXIF information – metadata that is recorded with most image formats. If you download and install the`exiftool`program, you can use it to convert your images into text about the metadata, so at least the diff will show you a textual representation of any changes that happened. Put the following line in your`.gitattributes`file:
+Еще одна интересная проблема, которую вы можете решить таким образом, заключается в разграничении файлов изображений. Один из способов сделать это - запустить файлы изображений через фильтр, который извлекает их EXIF-информацию - метаданные, записанные в большинстве форматов изображений. Если вы скачаете и установите программу `exiftool`, вы можете использовать ее для преобразования ваших изображений в текст о метаданных, поэтому, по крайней мере, diff покажет вам текстовое представление всех произошедших изменений. Поместите следующую строку в ваш файл `.gitattributes`:
 
 ```ini
 *.png diff=exif
 ```
 
-Configure Git to use this tool:
+Настройте Git для использования этого инструмента:
 
 ```console
 $ git config diff.exif.textconv exiftool
 ```
 
-If you replace an image in your project and run`git diff`, you see something like this:
+Если вы замените изображение в своем проекте и запустите `git diff`, вы увидите что-то вроде этого:
 
 ```diff
 diff --git a/image.png b/image.png
@@ -113,19 +113,19 @@ index 88839c4..4afcb7c 100644
  Color Type                      : RGB with Alpha
 ```
 
-You can easily see that the file size and image dimensions have both changed.
+Вы можете легко увидеть, что размер файла и размеры изображения изменились.
 
-### Keyword Expansion
+### Расширение ключевого слова
 
-SVN- or CVS-style keyword expansion is often requested by developers used to those systems. The main problem with this in Git is that you can’t modify a file with information about the commit after you’ve committed, because Git checksums the file first. However, you can inject text into a file when it’s checked out and remove it again before it’s added to a commit. Git attributes offers you two ways to do this.
+Разработчики, использующие эти системы, часто запрашивают расширение ключевых слов в стиле SVN или CVS. Основная проблема с этим в Git состоит в том, что вы не можете изменить файл с информацией о коммите после того, как вы зафиксировали, потому что Git сначала проверяет суммы файла. Тем не менее, вы можете вставить текст в файл, когда он извлечен, и удалить его снова, прежде чем он будет добавлен в коммит. Атрибуты Git предлагают вам два способа сделать это.
 
-First, you can inject the SHA-1 checksum of a blob into an`$Id$`field in the file automatically. If you set this attribute on a file or set of files, then the next time you check out that branch, Git will replace that field with the SHA-1 of the blob. It’s important to notice that it isn’t the SHA-1 of the commit, but of the blob itself. Put the following line in your`.gitattributes`file:
+Во-первых, вы можете автоматически ввести контрольную сумму SHA-1 большого двоичного объекта в поле `$Id$` в файле. Если вы установите этот атрибут для файла или набора файлов, то в следующий раз, когда вы извлечете эту ветку, Git заменит это поле на SHA-1 большого двоичного объекта. Важно отметить, что это не SHA-1 коммита, а сам блоб. Поместите следующую строку в ваш файл `.gitattributes`:
 
 ```ini
 *.txt ident
 ```
 
-Add an`$Id$`reference to a test file:
+Добавьте ссылку `$Id$` в тестовый файл:
 
 ```console
 $ echo '$Id$' > test.txt
