@@ -146,26 +146,26 @@ $Id: 42812b7653c7b88933f8a9d6cad0ca16714b9bb3 $
 
 ![](/images/8c34c1aeb3ddf12194cfa7ac92160491.png)
 
-Figure 144. The “smudge” filter is run on checkout.
+Рисунок 144. Фильтр «smudge» запускается при checkout.
 
 ![The ``smudge'' filter is run on checkout.](/images/2b92285c3b797e606ca4792eb9ff5dde.png)Figure 144. The “smudge” filter is run on checkout.![The ``clean'' filter is run when files are staged.](/images/ac5b46b36c9200ccec5d88a7159350d9.png)
 
-Figure 145. The “clean” filter is run when files are staged.
+Рисунок 145. «clean» фильтр запускается, когда файлы находятся в стадии подготовки.
 
-The original commit message for this feature gives a simple example of running all your C source code through the`indent`program before committing. You can set it up by setting the filter attribute in your`.gitattributes`file to filter`*.c`files with the “indent” filter:
+В исходном сообщении о фиксации для этой функции приведен простой пример запуска всего исходного кода на языке C с помощью программы `indent` перед фиксацией. Вы можете установить его, установив атрибут фильтра в вашем файле `.gitattributes` для фильтрации файлов \*.c с фильтром «indent»:
 
 ```ini
 *.c filter=indent
 ```
 
-Then, tell Git what the “indent” filter does on smudge and clean:
+Затем скажите Git, что делает фильтр «indent» в smudge и clean:
 
 ```console
 $ git config --global filter.indent.clean indent
 $ git config --global filter.indent.smudge cat
 ```
 
-In this case, when you commit files that match`*.c`, Git will run them through the indent program before it stages them and then run them through the`cat`program before it checks them back out onto disk. The`cat`program does essentially nothing: it spits out the same data that it comes in. This combination effectively filters all C source code files through`indent`before committing.
+В этом случае, когда вы фиксируете файлы, которые соответствуют `*.c`, Git будет запускать их через программу indent перед тем, как запускать их, а затем запускать через программу `cat`, прежде чем проверять их обратно на диск. Программа `cat` по сути ничего не делает: она выдает те же данные, что и в нее. Эта комбинация эффективно фильтрует все файлы с исходным кодом на языке C с помощью `indent` перед фиксацией.
 
 Another interesting example gets`$Date$`keyword expansion, RCS style. To do this properly, you need a small script that takes a filename, figures out the last commit date for this project, and inserts the date into the file. Here is a small Ruby script that does that:
 
