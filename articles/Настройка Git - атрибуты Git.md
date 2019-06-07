@@ -291,3 +291,6 @@ Merge made by recursive.
 ```
 
 In this case,`database.xml`stays at whatever version you originally had.
+
+**********
+[gitattributes](/tags/gitattributes.md)
