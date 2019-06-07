@@ -43,7 +43,7 @@ Binary files a/chapter1.docx and b/chapter1.docx differ
 
 Это говорит Git, что любой файл, соответствующий этому шаблону (`.docx`), должен использовать фильтр «word», когда вы пытаетесь просмотреть diff, содержащий изменения. Что такое «word» фильтр? Вы должны настроить это. Здесь вы сконфигурируете Git для использования программы `docx2txt` для преобразования документов Word в читаемые текстовые файлы, которые затем будут правильно отображаться.
 
-First, you’ll need to install`docx2txt`; you can download it from[https://sourceforge.net/projects/docx2txt](https://sourceforge.net/projects/docx2txt). Follow the instructions in the`INSTALL`file to put it somewhere your shell can find it. Next, you’ll write a wrapper script to convert output to the format Git expects. Create a file that’s somewhere in your path called`docx2txt`, and add these contents:
+Во-первых, вам нужно установить `docx2txt`; Вы можете скачать его с [https://sourceforge.net/projects/docx2txt](https://sourceforge.net/projects/docx2txt). Следуйте инструкциям в файле `INSTALL`, чтобы поместить его туда, где его может найти ваша оболочка. Затем вы напишите скрипт-обертку для преобразования вывода в формат, ожидаемый Git. Создайте файл, который находится где-то на вашем пути, под названием `docx2txt`, и добавьте следующее содержимое:
 
 ```console
 #!/bin/bash
