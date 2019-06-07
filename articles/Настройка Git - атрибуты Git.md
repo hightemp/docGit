@@ -131,7 +131,7 @@ index 88839c4..4afcb7c 100644
 $ echo '$Id$' > test.txt
 ```
 
-The next time you check out this file, Git injects the SHA-1 of the blob:
+В следующий раз, когда вы извлечете этот файл, Git вставит SHA-1 большого двоичного объекта:
 
 ```console
 $ rm test.txt
