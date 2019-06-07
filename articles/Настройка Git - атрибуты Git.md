@@ -290,7 +290,7 @@ Auto-merging database.xml
 Merge made by recursive.
 ```
 
-In this case,`database.xml`stays at whatever version you originally had.
+В этом случае `database.xml` остается той версии, которая у вас была изначально.
 
 
 **********
