@@ -1,14 +1,14 @@
-# Customizing Git - Git Attributes
+# Настройка Git - атрибуты Git
 
-## Git Attributes
+## Атрибуты Git
 
-Some of these settings can also be specified for a path, so that Git applies those settings only for a subdirectory or subset of files. These path-specific settings are called Git attributes and are set either in a`.gitattributes`file in one of your directories (normally the root of your project) or in the`.git/info/attributes`file if you don’t want the attributes file committed with your project.
+Некоторые из этих настроек также могут быть указаны для пути, так что Git применяет эти настройки только для подкаталога или подмножества файлов. Эти специфичные для пути настройки называются атрибутами Git и задаются либо в файле `.gitattributes` в одном из ваших каталогов (обычно в корне вашего проекта), либо в файле `.git/info/attribute`, если вы не хотите, чтобы файл атрибутов был зафиксирован в вашем проекте.
 
-Using attributes, you can do things like specify separate merge strategies for individual files or directories in your project, tell Git how to diff non-text files, or have Git filter content before you check it into or out of Git. In this section, you’ll learn about some of the attributes you can set on your paths in your Git project and see a few examples of using this feature in practice.
+Используя атрибуты, вы можете делать такие вещи, как указание отдельных стратегий слияния для отдельных файлов или каталогов в вашем проекте, указывать Git, как создавать нетекстовые файлы, или использовать Git-фильтр для содержимого перед тем, как проверять его в Git или из него. В этом разделе вы узнаете о некоторых атрибутах, которые вы можете установить в своих путях в своем проекте Git, и увидите несколько примеров использования этой функции на практике.
 
-### Binary Files
+### Двоичные файлы
 
-One cool trick for which you can use Git attributes is telling Git which files are binary (in cases it otherwise may not be able to figure out) and giving Git special instructions about how to handle those files. For instance, some text files may be machine generated and not diffable, whereas some binary files can be diffed. You’ll see how to tell Git which is which.
+Один интересный трюк, для которого вы можете использовать атрибуты Git - это сообщить Git, какие файлы являются двоичными (в противном случае он не сможет это выяснить), и дать Git специальные инструкции о том, как обрабатывать эти файлы. Например, некоторые текстовые файлы могут быть сгенерированы машиной и не могут быть различимы, тогда как некоторые двоичные файлы могут быть различимы. Вы увидите, как сказать Git, что есть что.
 
 #### Identifying Binary Files
 
